@@ -16,7 +16,7 @@ object bubbleSortTest {
 
     def bublle_sort(list : Array[Float]):Array[Float] = {
         for (i <- 0 until list.length) {
-            for (j <- 0 until list.length - i - 1) { //Each every inner loop, list.length-i-1 to list.length is already sorted.
+            for (j <- 0 until list.length - i - 1) { 
                 if (list(j) > list(j + 1)) {
                     var tmp = list(j)
                     list(j) = list(j + 1)
@@ -30,7 +30,7 @@ object bubbleSortTest {
 
 
     def check_result(l1: Array[Float],l2: Array[Float]) : Boolean =  l1.zip(l2).map{case (a,b) => a-b}.filter(_!=0f).size == 0
-    
+
     
 }
 
