@@ -16,13 +16,18 @@ object Factorization {
         for (i <- 0 until testList1.size){
 
             print(testList1(i)+":")
-            factorize(testList1(i)).foreach(a => print(a+","))
+           // factorize(testList1(i)).foreach(a => print(a+","))
+        
+            marging(factorize(testList1(i))).foreach(a => print(a+","))
             println()
         }
 
         
     }
 
+    ///素因数分解をするProgram
+    /// Input：Int
+    /// OutPut：Array[Int]
     def factorize(n : Int):Array[Int] = {
         var returnList = Array[Int]()
         var tmp = n
@@ -38,6 +43,34 @@ object Factorization {
             returnList = returnList :+ n
         }
 
+        returnList
+    }
+
+    ///素因数分解の結果を冪乗にして返す
+    /// Input：Array[Int]
+    /// OutPut：Array[String]
+    def marging(numberList:Array[Int]) ={
+        var returnList = Array[String]()
+        var Dic = Map.empty[Int, Int]
+
+        for(number <- numberList){
+            if(Dic contains number){
+                var preCount = Dic(number)
+                Dic = Dic updated (number,  preCount + 1) 
+            }else{
+                Dic = Dic updated (number,1)
+            }ß
+        }
+        for (result <- Dic.keySet){
+
+            if(Dic(result) > 1){
+                returnList = returnList :+ result+"^"+Dic(result).toString()
+            }
+            else
+            {
+                returnList = returnList :+ result.toString()
+            }
+        }
         returnList
     }
 }
