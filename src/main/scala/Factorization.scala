@@ -1,30 +1,38 @@
 import scala.util.Random
 import scala.math._
+import java.io.PrintWriter
 object Factorization {
     def main(args: Array[String]): Unit = {
         val size = 10
-        var max = 10
+        val epo = 3
+        var max = 100
+        
         var testList1 = List.fill(size)(Random.nextInt(max))
 
-        for (i <- 0 until 5){
+        for (i <- 0 until epo){
 
             testList1 = testList1 ::: List.fill(size)(Random.nextInt(max))
             max *= 10
         }
-
+        val file = new PrintWriter("testdata/testdata.txt")
         println("---------")
         for (i <- 0 until testList1.size){
-
-            print(testList1(i)+":")
-           // factorize(testList1(i)).foreach(a => print(a+","))
-        
-            marging(factorize(testList1(i))).foreach(a => print(a+","))
-            println()
+            
+            var result = listRichString(marging(factorize(testList1(i))))
+            file.write(testList1(i)+":"+result+"\n")
+            println(testList1(i)+":"+result)
         }
-
+        
+        file.close()
         
     }
 
+
+
+    def listRichString(list :Array[Int]):String= list.mkString(",")
+
+    def listRichString(list :Array[String]):String= list.mkString(",")
+    
     ///素因数分解をするProgram
     /// Input：Int
     /// OutPut：Array[Int]
@@ -43,7 +51,7 @@ object Factorization {
             returnList = returnList :+ n
         }
 
-        returnList
+        return returnList.sorted
     }
 
     ///素因数分解の結果を冪乗にして返す
@@ -59,7 +67,7 @@ object Factorization {
                 Dic = Dic updated (number,  preCount + 1) 
             }else{
                 Dic = Dic updated (number,1)
-            }ß
+            }
         }
         for (result <- Dic.keySet){
 
