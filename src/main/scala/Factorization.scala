@@ -18,7 +18,7 @@ object Factorization {
         println("---------")
         for (i <- 0 until testList1.size){
             
-            var result = listRichString(marging(factorize(testList1(i))))
+            var result = listRichString(factorize(testList1(i)))
             file.write(testList1(i)+":"+result+"\n")
             println(testList1(i)+":"+result)
         }
